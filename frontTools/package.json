@@ -1,0 +1,33 @@
+{
+  "name": "b4bpokedex",
+  "version": "1.0.0",
+  "description": "Simple pokedex",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pabloparejo/pokedex.git"
+  },
+  "keywords": [
+    "pokemon"
+  ],
+  "author": "Pablo Parejo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pabloparejo/pokedex/issues"
+  },
+  "homepage": "https://github.com/pabloparejo/pokedex#readme",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "gulp": "^4.0.0",
+    "gulp-inject": "^4.3.2",
+    "gulp-ng-annotate": "^2.1.0",
+    "gulp-sass": "^4.0.1",
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {
+    "angular": "^1.7.3"
+  }
+}
