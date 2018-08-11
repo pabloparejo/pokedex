@@ -1,6 +1,6 @@
 (
   function() {
     'use strict';
-    angular.module('pokedex', []);
+    angular.module('pokedexApp', ['ui.router']);
   }
 )();
