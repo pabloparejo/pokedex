@@ -6,7 +6,6 @@
     .factory('PokedexFactory', PokedexFactory);
 
   function PokedexFactory($q, $http) {
-    var modelName = 'artists';
     var service = {
       cancel: cancel,
       filter: filter,

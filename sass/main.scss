@@ -1,6 +1,83 @@
-$backgroundColor: #EAEAEA;
+@import "pokemon-type-colors.scss";
+
+$small-width: 426px;
+$large-width: 781px;
+$xlarge-width: 1441px;
+
+$background-color: #f3f6f9;
+$pokemon-background: #fafafa;
+
+$primary-font-color: #232629;
+$secondary-font-color: #b3b6b9;
+
+* {
+    box-sizing: border-box;
+}
 
 body, html{
+    background: $background-color;
+    color: $primary-font-color;
+    font-family: Roboto, 'Open Sans', Helvetica, Arial, sans-serif;
     margin: 0;
-    background: $backgroundColor;
 } 
+
+.pokemon-container{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 1em auto;
+    .pokemon{
+        $pokemon-margin: 6px;
+
+        background: $pokemon-background;
+        box-shadow: 0 8px 20px 0 rgba(30, 35, 40, 0.05);
+        margin: $pokemon-margin;
+        order: 1;
+        text-align: center;
+        padding: 1em;
+        transition: all ease-in .2s;
+        width: calc(50% - #{$pokemon-margin * 2});
+
+        &:hover{
+            box-shadow: 0 8px 22px 0 rgba(30, 35, 40, 0.15);
+        }
+
+        .pokemon-image{
+            display: block;
+            margin: 0 auto;
+        }
+
+        .pokemon-name{
+            font-size: 1.3em;
+            margin: 0;
+        }
+
+        .pokemon-number{
+            color: $secondary-font-color;
+            margin: 2px 0 0;
+        }
+
+        .pokemon-type{
+            border-radius: 10000px;
+            color: white;
+            font-size: 0.7em;
+            margin: 1px;
+            padding: 0.3em 0.55em;
+        }
+
+        @media screen and (min-width: $small-width) {
+            $pokemon-margin: 14px;
+            width: calc(33.33% - #{$pokemon-margin});
+        }
+
+        @media screen and (min-width: $large-width) {
+            width: calc(20% - #{$pokemon-margin});
+        }
+
+        @media screen and (min-width: $xlarge-width) {
+            width: calc(12.5% - #{$pokemon-margin});
+        }
+    }
+}

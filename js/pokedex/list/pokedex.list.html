@@ -1,5 +1,13 @@
-<div class="row">
-    <div class="pokemon" ng-repeat='pokemon in Pokedex.pokemons'>
-        <p ng-bind='pokemon.name'></p>
-    </div>
-</div>
+<section class="pokemon-container">
+    <article class="pokemon" ng-repeat='pokemon in Pokedex.pokemons'>
+        <p ng-bind='pokemon.name' class="pokemon-name"></p>
+        <p ng-bind='"#" + pokemon.pkdx_id' class="pokemon-number"></p>
+        <img ng-src="{{pokemon | getImage}}" 
+             alt="{{pokemon.name}}" 
+             class="pokemon-image">
+        <span ng-repeat='type in pokemon.types' 
+              ng-bind='type.name' 
+              class="pokemon-type" 
+              ng-class='type.name | lowercase'></span>
+    </article>
+</section>
