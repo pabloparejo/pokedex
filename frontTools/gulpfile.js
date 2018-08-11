@@ -10,7 +10,7 @@ var sass = require('gulp-sass');
 var vendorFiles = ['./node_modules/angular/angular.js', 
                    './node_modules/angular-ui-router/release/angular-ui-router.min.js'];
 
-var cssFiles = ['../sass/**/*.scss']
+var cssFiles = ['../sass/main.scss']
 var cssDest = '../dist/css/'
 function clean(done) {
     del(['../dist/**/*.*'], {force: true});
