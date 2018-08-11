@@ -7,18 +7,22 @@ var ngAnnotate = require('gulp-ng-annotate');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 
-var vendor_files = ['./node_modules/angular/angular.js', 
-                    './node_modules/angular-ui-router/release/angular-ui-router.min.js'];
+var vendorFiles = ['./node_modules/angular/angular.js', 
+                   './node_modules/angular-ui-router/release/angular-ui-router.min.js'];
 
+var cssFiles = ['../sass/**/*.scss']
+var cssDest = '../dist/css/'
 function clean(done) {
     del(['../dist/**/*.*'], {force: true});
     done();
 }
 
 function copyIndex(done) {
-  var sources = gulp.src(vendor_files, {read: false});
+  var jsSources = gulp.src(vendorFiles, {read: false});
+  var cssSources = gulp.src(cssDest + '**/*.css')
   return gulp.src('../index.html')
-             .pipe(inject(sources, {name: 'vendor', ignorePath: 'node_modules', addPrefix: 'js/vendor'}))
+             .pipe(inject(jsSources, {name: 'vendor', ignorePath: 'node_modules', addPrefix: 'js/vendor'}))
+             .pipe(inject(cssSources, {name: 'styles', ignorePath: '../dist/'}))
              .pipe(gulp.dest('../dist', {overwrite: true}));
 }
 
@@ -36,18 +40,18 @@ function copyAppJs(done) {
 }
 
 function copyVendor(done) {
-  return gulp.src(vendor_files, {base: './node_modules'})
+  return gulp.src(vendorFiles, {base: './node_modules'})
              .pipe(gulp.dest('../dist/js/vendor', {overwrite: true}));
 }
 
 function processCSS(done) {
-  return gulp.src('../sass/**/*.scss')
+  return gulp.src(cssFiles)
              .pipe(sass().on('error', sass.logError))
-             .pipe(gulp.dest('../dist/css/'));
+             .pipe(gulp.dest(cssDest));
 }
 
 function build(done){
-  return gulp.series(clean, copyIndex, copyTemplates, copyAppJs, copyVendor, processCSS)(done);
+  return gulp.series(clean, copyTemplates, copyAppJs, copyVendor, processCSS, copyIndex)(done);
 }
 
 function watch(done) {

@@ -1,6 +1,6 @@
-h1{
-    color: red;
-    size: 1rem;
-}
+$backgroundColor: #EAEAEA;
 
-h2{ color:blue}
+body, html{
+    margin: 0;
+    background: $backgroundColor;
+} 
