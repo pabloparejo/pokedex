@@ -6,8 +6,12 @@
     .filter('getImage', getImage);
 
   function getImage() {
-    return function(input) {
-        return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + input.pkdx_id + '.png';
+    return function(pokemon) {
+        if (pokemon._loading) {
+            return 'https://www.hudson29.com/desktopmodules/avatarsoft/ActionForm/static/loader/fading-line.GIF';
+        }else{
+            return pokemon._detail.sprites.front_default;
+        }
     }
   }
 

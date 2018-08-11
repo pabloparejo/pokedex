@@ -1,13 +1,21 @@
 <section class="pokemon-container">
     <article class="pokemon" ng-repeat='pokemon in Pokedex.pokemons | filter:{"name": Pokedex.search.query}'>
         <p ng-bind='pokemon.name' class="pokemon-name"></p>
-        <p ng-bind='"#" + pokemon.pkdx_id' class="pokemon-number"></p>
         <img ng-src="{{pokemon | getImage}}" 
              alt="{{pokemon.name}}" 
-             class="pokemon-image">
         <span ng-repeat='type in pokemon.types' 
               ng-bind='type.name' 
               class="pokemon-type" 
               ng-class='type.name | lowercase'></span>
+             class="pokemon-image"
+             ng-class='{"loading": pokemon._loading}'>
     </article>
 </section>
+<footer class="pagination">
+    <button ng-click='Pokedex.prevPage()' ng-disabled='!Pokedex.pagination.prev' class="prev">
+        Prev
+    </button>
+    <button ng-click='Pokedex.nextPage()' ng-disabled='!Pokedex.pagination.next' class="next">
+        Next
+    </button>
+</footer>

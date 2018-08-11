@@ -8,7 +8,7 @@
   function PokedexFactory($q, $http) {
     var service = {
       cancel: cancel,
-      filter: filter,
+      detail: detail,
       list: list
     };
 
@@ -23,11 +23,11 @@
       }
     }
 
-    function filter(query) {
+    function list(query, url) {
       var queryAux = angular.copy(query);
       if (queryAux.query) queryAux.query = encodeURIComponent(queryAux.query);
-      var url = 'https://pokeapi.co/api/v1/pokemon/',
-          deferred = $q.defer(),
+      url = url ? url : 'https://pokeapi.co/api/v2/pokemon/';
+      var deferred = $q.defer(),
           config = {
             timeout: deferred.promise,
             params: queryAux
@@ -43,8 +43,15 @@
       return deferred.promise;
     }
 
-    function list() {
-      return filter({});
+    function detail(pokemon) {
+      var deferred = $q.defer();
+
+      $http.get(pokemon.url).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(reason) {
+        deferred.reject(reason);
+      });
+      return deferred.promise;
     }
   }
 

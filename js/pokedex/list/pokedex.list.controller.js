@@ -6,13 +6,16 @@
 
     function PokedexListController(PokedexFactory, PokedexSearchFactory){
         var vm = this;
+        vm.pagination = {};
         vm.search = {
-            limit: 25
+            limit: 8
         };
 
         // Methods
         vm.getPokemons = getPokemons;
         vm.searchChange = searchChange;
+        vm.nextPage = nextPage;
+        vm.prevPage = prevPage;
 
         init();
 
@@ -21,16 +24,40 @@
             vm.getPokemons(vm.search);
         }
         
-        function getPokemons(search) {
+        function getPokemons(search, url) { 
             PokedexFactory.cancel(vm._filterRequest); // Delete previous request if exists
-            vm._filterRequest = PokedexFactory.filter(search)
+            vm._filterRequest = PokedexFactory.list(search, url)
             vm._filterRequest.then(function(data) {
-                vm.pokemons = data.objects;
+                vm.pagination.prev = data.previous;
+                vm.pagination.next = data.next;
+                for (var i = 0; i < data.results.length; i++) {
+                    fetchDetail(data.results[i]);
+                }
+                vm.pokemons = data.results;
             })
+        }
+
+        function fetchDetail(pokemon) {
+            pokemon._loading = true;
+
+            // Sorry, PokeApi :(
+            PokedexFactory.detail(pokemon)
+                .then(function(data) {
+                    pokemon._detail = data;
+                    pokemon._loading = false;
+                })
         }
 
         function searchChange(search) {
             vm.search.query = search.query;
+        }
+
+        function nextPage() {
+            vm.getPokemons({}, vm.pagination.next)
+        }
+
+        function prevPage() {
+            vm.getPokemons({}, vm.pagination.prev)
         }
     }
   }
