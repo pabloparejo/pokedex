@@ -1,5 +1,5 @@
 <section class="pokemon-container">
-    <article class="pokemon" ng-repeat='pokemon in Pokedex.pokemons'>
+    <article class="pokemon" ng-repeat='pokemon in Pokedex.pokemons | filter:{"name": Pokedex.search.query}'>
         <p ng-bind='pokemon.name' class="pokemon-name"></p>
         <p ng-bind='"#" + pokemon.pkdx_id' class="pokemon-number"></p>
         <img ng-src="{{pokemon | getImage}}" 

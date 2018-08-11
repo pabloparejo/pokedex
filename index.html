@@ -6,7 +6,7 @@
     <meta name="author" content="Pablo Parejo">
     <title>Pokedex - Pablo Parejo</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:200,400,700" rel="stylesheet">
     
     <!-- Vendor Files -->
     <!-- vendor:js -->
@@ -17,7 +17,11 @@
     <!-- endinject -->
 </head>
 <body ng-app='pokedexApp'>
-    <div ui-view></div>
+    <header class="header">
+        <h1 class='title'>Pokedex - Pablo Parejo</h1>
+        <search-component></search-component>
+    </header>
+    <section ui-view></section>
     <!-- App Files -->
     <script src="/js/app.js"></script>
 </body>

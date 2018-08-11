@@ -1,4 +1,5 @@
 'use strict';
+var angularFilesort = require('gulp-angular-filesort');
 var concat = require('gulp-concat');
 var del = require('del');
 var gulp = require('gulp');
@@ -33,8 +34,12 @@ function copyTemplates(done) {
 }
 
 function copyAppJs(done) {
+  var options = {
+    types: ['module', 'service', 'controller', 'directive', 'filter', 'routes', 'config']
+  }
   return gulp.src('../js/**/*.js')
              .pipe(ngAnnotate())
+             .pipe(angularFilesort())
              .pipe(concat('app.js'))
              .pipe(gulp.dest('../dist/js/', {overwrite: true}));
 }

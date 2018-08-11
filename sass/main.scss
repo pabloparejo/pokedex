@@ -4,11 +4,14 @@ $small-width: 426px;
 $large-width: 781px;
 $xlarge-width: 1441px;
 
-$background-color: #f3f6f9;
+$background-color: #f0f3f6;
 $pokemon-background: #fafafa;
+$header-background: #fafafa;
 
-$primary-font-color: #232629;
-$secondary-font-color: #b3b6b9;
+$primary-font-color: #202326;
+$secondary-font-color: #b0b3b6;
+
+$transparent-gray-color: rgba(30, 35, 40, 0.15);
 
 * {
     box-sizing: border-box;
@@ -19,7 +22,49 @@ body, html{
     color: $primary-font-color;
     font-family: Roboto, 'Open Sans', Helvetica, Arial, sans-serif;
     margin: 0;
-} 
+}
+
+.header{
+    background-color: $header-background;
+    border-bottom: 1px solid $transparent-gray-color;
+    color: $primary-font-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em;
+
+
+    .title{
+        font-size: 1.5em;
+        text-align: center;
+
+        @media screen and (min-width: $small-width) {
+            font-size: 2.5em;
+            font-weight: lighter;
+        }
+    }
+    
+    .search-container{
+        width: 100%;
+        max-width: 500px;
+        flex-grow: 1;
+        margin: 0 auto;
+        .search{
+            border-radius: 100px;
+            border: 1px solid $transparent-gray-color;
+            display: block;            
+            font-size: 1.25em;
+            outline: none;
+            padding: .5em;
+            transition: all ease-in 0.2s;
+            width: 100%;
+
+            &:focus{
+                border: 1px solid;
+            }
+        }
+    }
+}
 
 .pokemon-container{
     align-items: flex-start;
@@ -28,20 +73,22 @@ body, html{
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: 1em auto;
+    max-width: $xlarge-width;
+    
+    $pokemon-margin: 6px;
+
     .pokemon{
-        $pokemon-margin: 6px;
 
         background: $pokemon-background;
         box-shadow: 0 8px 20px 0 rgba(30, 35, 40, 0.05);
         margin: $pokemon-margin;
-        order: 1;
         text-align: center;
         padding: 1em;
         transition: all ease-in .2s;
         width: calc(50% - #{$pokemon-margin * 2});
 
         &:hover{
-            box-shadow: 0 8px 22px 0 rgba(30, 35, 40, 0.15);
+            box-shadow: 0 8px 22px 0 $transparent-gray-color;
         }
 
         .pokemon-image{
@@ -66,18 +113,21 @@ body, html{
             margin: 1px;
             padding: 0.3em 0.55em;
         }
+    }
 
-        @media screen and (min-width: $small-width) {
-            $pokemon-margin: 14px;
+    @media screen and (min-width: $small-width) {
+        $pokemon-margin: 14px;
+
+        .pokemon{
             width: calc(33.33% - #{$pokemon-margin});
         }
 
-        @media screen and (min-width: $large-width) {
-            width: calc(20% - #{$pokemon-margin});
-        }
+        padding: $pokemon-margin;
+    }
 
-        @media screen and (min-width: $xlarge-width) {
-            width: calc(12.5% - #{$pokemon-margin});
+    @media screen and (min-width: $large-width) {
+        .pokemon{
+            width: calc(20% - #{$pokemon-margin});
         }
     }
 }

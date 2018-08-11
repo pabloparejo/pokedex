@@ -1,21 +1,23 @@
 (
   function() {
     'use strict';
-    angular.module('pokedex.list', [])
+    angular.module('pokedex.list', ['pokedex.search'])
            .controller('PokedexListController', PokedexListController);
 
-    function PokedexListController(PokedexFactory){
+    function PokedexListController(PokedexFactory, PokedexSearchFactory){
         var vm = this;
         vm.search = {
-            limit: 10
+            limit: 25
         };
 
         // Methods
         vm.getPokemons = getPokemons;
+        vm.searchChange = searchChange;
 
         init();
 
         function init() {
+            PokedexSearchFactory.onSearch(vm.searchChange)
             vm.getPokemons(vm.search);
         }
         
@@ -25,6 +27,10 @@
             vm._filterRequest.then(function(data) {
                 vm.pokemons = data.objects;
             })
+        }
+
+        function searchChange(search) {
+            vm.search.query = search.query;
         }
     }
   }

@@ -1,0 +1,8 @@
+<article class='search-container'>
+    <input type="text" 
+           class="search" 
+           placeholder="Search" 
+           ng-change='Search.onSearch(Search.search)'
+           ng-model='Search.search.query' 
+           ng-model-options='{debounce: 500}'>
+</article>
