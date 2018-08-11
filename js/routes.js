@@ -11,5 +11,11 @@
       .state('site', {
         template: '<div ui-view></div>'
       })
+      .state('site.home', {
+        url: '/',
+        controller: 'PokedexListController',
+        controllerAs: 'Pokedex',
+        templateUrl: 'templates/pokedex-list.html'
+      })
   }
 })();
