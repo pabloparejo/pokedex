@@ -15,7 +15,7 @@
         url: '/',
         controller: 'PokedexListController',
         controllerAs: 'Pokedex',
-        templateUrl: 'templates/pokedex-list.html'
+        templateUrl: 'templates/pokedex.list.html'
       })
   }
 })();
