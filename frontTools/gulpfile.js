@@ -1,14 +1,14 @@
 'use strict';
-var gulp = require('gulp');
+var concat = require('gulp-concat');
 var del = require('del');
+var gulp = require('gulp');
 var inject = require('gulp-inject');
 var ngAnnotate = require('gulp-ng-annotate');
+var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 
-gulp.task('default',  gulp.series(clean, copyIndex, copyAppJs, copyVendor, processCSS));
-gulp.task('watch', gulp.series('default', watch));
-
-var vendor_files = ['./node_modules/angular/angular.js'];
+var vendor_files = ['./node_modules/angular/angular.js', 
+                    './node_modules/angular-ui-router/release/angular-ui-router.min.js'];
 
 function clean(done) {
     del(['../dist/**/*.*'], {force: true});
@@ -22,9 +22,16 @@ function copyIndex(done) {
              .pipe(gulp.dest('../dist', {overwrite: true}));
 }
 
+function copyTemplates(done) {
+  return gulp.src('../js/**/*.html')
+             .pipe(rename({dirname: ''}))
+             .pipe(gulp.dest('../dist/templates', {overwrite: true}));
+}
+
 function copyAppJs(done) {
   return gulp.src('../js/**/*.js')
              .pipe(ngAnnotate())
+             .pipe(concat('app.js'))
              .pipe(gulp.dest('../dist/js/', {overwrite: true}));
 }
 
@@ -39,7 +46,15 @@ function processCSS(done) {
              .pipe(gulp.dest('../dist/css/'));
 }
 
-function watch(done) {
-  return gulp.watch(['../js/*.*', '../sass/*.*', '../*.html'],
-                    gulp.series(clean, copyIndex, copyAppJs, copyVendor, processCSS));
+function build(done){
+  return gulp.series(clean, copyIndex, copyTemplates, copyAppJs, copyVendor, processCSS)(done);
 }
+
+function watch(done) {
+  return gulp.watch(['../js/**/*.js', '../sass/*.*', '../*.html', '../js/**/*.html'],
+                    build);
+}
+
+
+gulp.task('default', build);
+gulp.task('watch', gulp.series('default', watch));
