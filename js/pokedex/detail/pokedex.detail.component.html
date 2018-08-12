@@ -1,0 +1,9 @@
+<article>
+    <h1 ng-bind='Detail.pokemon.name'></h1>
+    <img ng-src="{{Detail.pokemon | getImage}}">
+    <types-component types='Detail.pokemon.types'></types-component>
+    <p ng-if='Detail.evolution'>
+        Evolves from: <a ng-bind='Detail.evolution.name' 
+                         ui-sref='site.detail({name: Detail.evolution.name})'></a>
+    </p>
+</article>

@@ -8,12 +8,14 @@
         var vm = this;
         vm.pagination = {};
         vm.search = {
-            limit: 8
+            limit: 1
         };
 
         // Methods
         vm.getPokemons = getPokemons;
+        vm.pokemonClick = pokemonClick;
         vm.searchChange = searchChange;
+
         vm.nextPage = nextPage;
         vm.prevPage = prevPage;
 
@@ -43,13 +45,16 @@
             // Sorry, PokeApi :(
             PokedexFactory.detail(pokemon)
                 .then(function(data) {
-                    pokemon._detail = data;
+                    for(var key in data) pokemon[key] = data[key];
                     pokemon._loading = false;
                 })
         }
 
         function searchChange(search) {
             vm.search.query = search.query;
+
+            // If PokeAPI would have search
+            // vm.getPokemons(vm.search)
         }
 
         function nextPage() {
@@ -58,6 +63,11 @@
 
         function prevPage() {
             vm.getPokemons({}, vm.pagination.prev)
+        }
+
+        function pokemonClick(pokemon) {
+            vm.selectedPokemon = pokemon;
+            vm.showDetail = true;
         }
     }
   }

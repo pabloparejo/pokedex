@@ -10,7 +10,7 @@
         if (pokemon._loading) {
             return 'https://www.hudson29.com/desktopmodules/avatarsoft/ActionForm/static/loader/fading-line.GIF';
         }else{
-            return pokemon._detail.sprites.front_default;
+            return pokemon.sprites.front_default;
         }
     }
   }
