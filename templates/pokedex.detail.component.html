@@ -1,0 +1,12 @@
+<article class="pokemon">
+    <button ng-click='Detail.show = false' class="close-btn">Close</button>
+    <header>
+        <h4 ng-bind='"#" + Detail.pokemon.id' class="pokemon-number"></h4>
+        <h1 ng-bind='Detail.pokemon.name' class="title"></h1>
+    </header>
+    <p ng-if='Detail.evolution' class="evolution">
+        Evolves from: <span ng-bind='Detail.evolution.name'></span>
+    </p>
+    <img ng-src="{{Detail.pokemon | getImage}}" class="pokemon-image">
+    <types-component types='Detail.pokemon.types'></types-component>
+</article>

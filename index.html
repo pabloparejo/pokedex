@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Pablo Parejo">
+    <title>Pokedex - Pablo Parejo</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:200,400,700" rel="stylesheet">
+    
+    <!-- Vendor Files -->
+    <!-- vendor:js -->
+    <script src="/js/vendor/angular/angular.js"></script>
+    <script src="/js/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- endinject -->
+
+    <!-- Style Files -->
+    <!-- styles:css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- endinject -->
+</head>
+<body ng-app='pokedexApp'>
+    <header class="header">
+        <h1 class='title'>Pokedex</h1>
+        <p class="subtitle">
+            Made with 
+            <img draggable="false" 
+                 class="emoji"
+                 alt="❤" 
+                 src="https://s.w.org/images/core/emoji/2.4/svg/2764.svg">
+            by <a href="https://github.com/pabloparejo" target="_blank">pabloparejo</a>
+        </p>
+        <search-component></search-component>
+    </header>
+    <section ui-view></section>
+    <!-- App Files -->
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
