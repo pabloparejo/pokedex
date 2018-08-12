@@ -1,3 +1,11 @@
+<aside class="pagination">
+    <button ng-click='Pokedex.prevPage()' ng-disabled='!Pokedex.pagination.prev' class="prev">
+        Prev
+    </button>
+    <button ng-click='Pokedex.nextPage()' ng-disabled='!Pokedex.pagination.next' class="next">
+        Next
+    </button>
+</aside>
 <section class="pokemon-container">
     <article class="pokemon" 
              ng-repeat='pokemon in Pokedex.pokemons | filter:{"name": Pokedex.search.query}'
@@ -10,15 +18,9 @@
         <types-component types='pokemon.types'></types-component>
     </article>
 </section>
-<footer class="pagination">
-    <button ng-click='Pokedex.prevPage()' ng-disabled='!Pokedex.pagination.prev' class="prev">
-        Prev
-    </button>
-    <button ng-click='Pokedex.nextPage()' ng-disabled='!Pokedex.pagination.next' class="next">
-        Next
-    </button>
-</footer>
 
-<pokedex-detail-component pokemon='Pokedex.selectedPokemon' 
-                          ng-if='Pokedex.showDetail'></pokedex-detail-component>
+<section class="pokemon-detail-container" ng-class='{"show": Pokedex.showDetail}'>
+<pokedex-detail-component pokemon='Pokedex.selectedPokemon' show='Pokedex.showDetail'>
+</pokedex-detail-component>
+</section>
 

@@ -12,12 +12,14 @@
         vm.$onChanges = onChanges;
 
         function onChanges(changes) {
-          SpeciesFactory.cancel(vm._detailRequest);
+          if (vm.pokemon) {
+            SpeciesFactory.cancel(vm._detailRequest);
 
-          vm._detailRequest = SpeciesFactory.detail(vm.pokemon);
-          vm._detailRequest.then(function(data) {
-              vm.evolution = data['evolves_from_species'];
-            })
+            vm._detailRequest = SpeciesFactory.detail(vm.pokemon);
+            vm._detailRequest.then(function(data) {
+                vm.evolution = data['evolves_from_species'];
+              })
+          }
         }
     }
   }

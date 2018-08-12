@@ -7,7 +7,8 @@
         controller: 'PokedexDetailController',
         controllerAs: 'Detail',
         bindings: {
-            pokemon: '<'
+            pokemon: '<',
+            show: '='
         }
       });
   }

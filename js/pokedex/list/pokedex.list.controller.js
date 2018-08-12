@@ -8,7 +8,7 @@
         var vm = this;
         vm.pagination = {};
         vm.search = {
-            limit: 1
+            limit: 8
         };
 
         // Methods
