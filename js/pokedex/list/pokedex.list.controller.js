@@ -13,8 +13,7 @@
 
         // Methods
         vm.getPokemons = getPokemons;
-        vm.pokemonClick = pokemonClick;
-        vm.searchChange = searchChange;
+        vm.selectPokemon = selectPokemon;
 
         vm.nextPage = nextPage;
         vm.prevPage = prevPage;
@@ -22,7 +21,7 @@
         init();
 
         function init() {
-            PokedexSearchFactory.onSearch(vm.searchChange)
+            PokedexSearchFactory.onSearch(_searchChange);
             vm.getPokemons(vm.search);
         }
         
@@ -50,12 +49,18 @@
                 })
         }
 
-        function searchChange(search) {
+        function _searchChange(search) {
             vm.search.query = search.query;
 
             // If PokeAPI would have search
             // vm.getPokemons(vm.search)
         }
+
+        function selectPokemon(pokemon) {
+            vm.selectedPokemon = pokemon;
+            vm.showDetail = true;
+        }
+
 
         function nextPage() {
             vm.getPokemons({}, vm.pagination.next)
@@ -65,10 +70,6 @@
             vm.getPokemons({}, vm.pagination.prev)
         }
 
-        function pokemonClick(pokemon) {
-            vm.selectedPokemon = pokemon;
-            vm.showDetail = true;
-        }
     }
   }
 )();
