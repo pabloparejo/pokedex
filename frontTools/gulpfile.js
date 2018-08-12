@@ -11,7 +11,7 @@ var sass = require('gulp-sass');
 var vendorFiles = ['./node_modules/angular/angular.js', 
                    './node_modules/angular-ui-router/release/angular-ui-router.min.js'];
 
-var cssFiles = ['../sass/main.scss']
+var cssFiles = ['../src/sass/main.scss']
 var cssDest = '../dist/css/'
 function clean(done) {
     del(['../dist/**/*.*'], {force: true});
@@ -21,14 +21,14 @@ function clean(done) {
 function copyIndex(done) {
   var jsSources = gulp.src(vendorFiles, {read: false});
   var cssSources = gulp.src(cssDest + '**/*.css')
-  return gulp.src('../index.html')
+  return gulp.src('../src/index.html')
              .pipe(inject(jsSources, {name: 'vendor', ignorePath: 'node_modules', addPrefix: 'js/vendor'}))
              .pipe(inject(cssSources, {name: 'styles', ignorePath: '../dist/'}))
              .pipe(gulp.dest('../dist', {overwrite: true}));
 }
 
 function copyTemplates(done) {
-  return gulp.src('../js/**/*.html')
+  return gulp.src('../src/js/**/*.html')
              .pipe(rename({dirname: ''}))
              .pipe(gulp.dest('../dist/templates', {overwrite: true}));
 }
@@ -37,7 +37,7 @@ function copyAppJs(done) {
   var options = {
     types: ['module', 'service', 'controller', 'directive', 'filter', 'routes', 'config']
   }
-  return gulp.src('../js/**/*.js')
+  return gulp.src('../src/js/**/*.js')
              .pipe(ngAnnotate())
              .pipe(angularFilesort())
              .pipe(concat('app.js'))
@@ -60,7 +60,7 @@ function build(done){
 }
 
 function watch(done) {
-  return gulp.watch(['../js/**/*.js', '../sass/*.*', '../*.html', '../js/**/*.html'],
+  return gulp.watch(['../src/js/**/*.js', '../src/sass/*.*', '../src/*.html', '../src/js/**/*.html'],
                     build);
 }
 

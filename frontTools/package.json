@@ -4,7 +4,7 @@
   "description": "Simple pokedex",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "./node_modules/http-server/bin/http-server ../dist"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/pabloparejo/pokedex#readme",
   "devDependencies": {
+    "angular": "^1.7.3",
     "eslint": "^5.3.0",
     "gulp": "^4.0.0",
     "gulp-angular-filesort": "^1.2.1",
